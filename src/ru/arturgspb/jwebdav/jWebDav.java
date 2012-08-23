@@ -53,6 +53,7 @@ public class jWebDav {
 		request.setHeader(HttpHeaders.AUTHORIZATION, authType.getHeaderValue());
 		HttpResponse response = httpClient.execute(request);
 		request.abort();
+		httpClient.clearRequestInterceptors();
 		return response;
 	}
 }

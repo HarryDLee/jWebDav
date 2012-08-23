@@ -7,8 +7,10 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import ru.arturgspb.jwebdav.auth.OAuth;
 import ru.arturgspb.jwebdav.jWebDav;
+import sun.net.www.protocol.http.HttpURLConnection;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -38,7 +40,8 @@ public class Main {
 			ImageIO.write(bufferedImage, "png", baos);
 			byte[] bytesOut = baos.toByteArray();
 			HttpResponse response = webdav.put(url, bytesOut, "image/png");
-			if (response.getStatusLine().getStatusCode() == 201) {
+			if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_CREATED) {
+				System.out.println("Created...");
 				HttpResponse response2 = webdav.post(url + "?publish");
 				System.out.println(response2.getLastHeader("Location").getValue());
 			}
