@@ -1,13 +1,4 @@
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ContentType;
-import com.sun.xml.internal.ws.encoding.ContentTypeImpl;
 import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.AbstractHttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
 import ru.arturgspb.jwebdav.auth.OAuth;
 import ru.arturgspb.jwebdav.jWebDav;
 import sun.net.www.protocol.http.HttpURLConnection;
@@ -32,6 +23,10 @@ public class Main {
 		Robot robot = null;
 
 		try {
+//			HttpResponse response3 = webdav.createDirectory("https://webdav.yandex.ru/my_dir/");
+//			System.out.println(response3);
+//			System.exit(1);
+
 			robot = new Robot();
 			Rectangle captureSize = new Rectangle(0, 0, 200, 500);
 			BufferedImage bufferedImage = robot.createScreenCapture(captureSize);
@@ -42,8 +37,8 @@ public class Main {
 			HttpResponse response = webdav.put(url, bytesOut, "image/png");
 			if (response.getStatusLine().getStatusCode() == HttpURLConnection.HTTP_CREATED) {
 				System.out.println("Created...");
-				HttpResponse response2 = webdav.post(url + "?publish");
-				System.out.println(response2.getLastHeader("Location").getValue());
+//				HttpResponse response2 = webdav.post(url + "?publish");
+//				System.out.println(response2.getLastHeader("Location").getValue());
 			}
 
 		} catch (IOException e) {

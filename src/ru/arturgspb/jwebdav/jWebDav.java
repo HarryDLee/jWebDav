@@ -1,7 +1,6 @@
 package ru.arturgspb.jwebdav;
 
 import com.sun.net.httpserver.Headers;
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
@@ -12,10 +11,12 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import ru.arturgspb.jwebdav.auth.AuthType;
+import ru.arturgspb.jwebdav.methods.HttpMkCol;
 
 import java.io.IOException;
 
 public class jWebDav {
+
 	AuthType authType;
 	AbstractHttpClient httpClient;
 
@@ -41,6 +42,11 @@ public class jWebDav {
 	public HttpResponse post(String url) throws IOException {
 		HttpPost post = new HttpPost(url);
 		return this.execute(post, null);
+	}
+
+	public HttpResponse createDirectory(String url) throws IOException {
+		HttpMkCol mkCol = new HttpMkCol(url);
+		return this.execute(mkCol, null);
 	}
 
 	private HttpResponse execute(HttpRequestBase request, Headers headers) throws IOException {
